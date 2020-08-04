@@ -1,5 +1,6 @@
 package org.itrace;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
@@ -23,6 +24,7 @@ import org.itrace.gaze.IStyledTextGazeResponse;
 import org.itrace.gaze.handlers.IGazeHandler;
 import org.itrace.gaze.handlers.StyledTextGazeHandler;
 import org.itrace.solvers.XMLGazeExportSolver;
+import org.itrace.Server;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -51,11 +53,14 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 	private long registerTime = 2000;
 	private IEventBroker eventBroker;
 	private Shell rootShell;
+	
+
+	private Server socketServer;
 
 	/**
 	 * The constructor
 	 */
-	public ITrace() {
+	public ITrace() {    	
 		/**
 		 * This part is used to stabilize the functioning of token highlighter.
 		 */
@@ -76,6 +81,10 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 		eventBroker.subscribe("iTrace/sessionend", this);
 		xmlSolver = new XMLGazeExportSolver();
 		eventBroker.subscribe("iTrace/xmlOutput", xmlSolver);
+		
+		socketServer = new Server();
+		Thread t1 = new Thread(socketServer);
+		t1.start();
 	}
 
 	/*
@@ -292,6 +301,7 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 								IGazeResponse response;
 								response = handleGaze(screenX, screenY, g);
 								if (response != null) {
+									socketServer.process(response);
 									xmlSolver.process(response);
 
 									if (response instanceof IStyledTextGazeResponse && response != null
