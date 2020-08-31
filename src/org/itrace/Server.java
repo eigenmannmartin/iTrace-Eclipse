@@ -1,5 +1,6 @@
 package org.itrace;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -32,6 +33,7 @@ public class Server implements Runnable {
             {
                 // Accept the next connection
             	server.accept( null, this );
+            	System.out.println("Connected client");
             	channel = ch;
             }
 
@@ -58,9 +60,14 @@ public class Server implements Runnable {
 			str.add(styledResponse.getPath());
 			str.add(String.valueOf(styledResponse.getLine()));
 			str.add(String.valueOf(styledResponse.getCol()));
-		}
+		}		
+
+		ByteBuffer output = ByteBuffer.wrap( (str.toString() + "\n").getBytes());
+		output.flip();
 		
-		channel.write(ByteBuffer.wrap( str.toString().getBytes() ) );
+		if (channel != null) {
+			channel.write(output);
+		}
 	}
 
 	@Override

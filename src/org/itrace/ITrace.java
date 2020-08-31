@@ -25,6 +25,7 @@ import org.itrace.gaze.handlers.IGazeHandler;
 import org.itrace.gaze.handlers.StyledTextGazeHandler;
 import org.itrace.solvers.XMLGazeExportSolver;
 import org.itrace.Server;
+import org.itrace.Client;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -56,6 +57,7 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 	
 
 	private Server socketServer;
+	private Client socketClient;
 
 	/**
 	 * The constructor
@@ -85,6 +87,12 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 		socketServer = new Server();
 		Thread t1 = new Thread(socketServer);
 		t1.start();
+		
+		System.out.println("(((>>>>=======================");
+		
+		socketClient = new Client();
+		Thread t2 = new Thread(socketClient);
+		t2.start();
 	}
 
 	/*
@@ -302,6 +310,7 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 								response = handleGaze(screenX, screenY, g);
 								if (response != null) {
 									socketServer.process(response);
+									socketClient.process(response);
 									xmlSolver.process(response);
 
 									if (response instanceof IStyledTextGazeResponse && response != null
