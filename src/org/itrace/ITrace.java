@@ -24,7 +24,7 @@ import org.itrace.gaze.IStyledTextGazeResponse;
 import org.itrace.gaze.handlers.IGazeHandler;
 import org.itrace.gaze.handlers.StyledTextGazeHandler;
 import org.itrace.solvers.XMLGazeExportSolver;
-import org.itrace.Server;
+//import org.itrace.Server;
 import org.itrace.Client;
 
 /**
@@ -56,7 +56,7 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 	private Shell rootShell;
 	
 
-	private Server socketServer;
+	//private Server socketServer;
 	private Client socketClient;
 
 	/**
@@ -84,11 +84,9 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 		xmlSolver = new XMLGazeExportSolver();
 		eventBroker.subscribe("iTrace/xmlOutput", xmlSolver);
 		
-		socketServer = new Server();
+		/*socketServer = new Server();
 		Thread t1 = new Thread(socketServer);
-		t1.start();
-		
-		System.out.println("(((>>>>=======================");
+		t1.start();*/
 		
 		socketClient = new Client();
 		Thread t2 = new Thread(socketClient);
@@ -309,7 +307,7 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 								IGazeResponse response;
 								response = handleGaze(screenX, screenY, g);
 								if (response != null) {
-									socketServer.process(response);
+									//socketServer.process(response);
 									socketClient.process(response);
 									xmlSolver.process(response);
 
