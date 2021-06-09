@@ -51,15 +51,12 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 	private long registerTime = 2000;
 	private IEventBroker eventBroker;
 	private Shell rootShell;
-	
-
-	//private Server socketServer;
 	private Client socketClient;
 
 	/**
 	 * The constructor
 	 */
-	public ITrace() {    	
+	public ITrace() {
 		/**
 		 * This part is used to stabilize the functioning of token highlighter.
 		 */
@@ -80,10 +77,6 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 		eventBroker.subscribe("iTrace/sessionend", this);
 		xmlSolver = new XMLGazeExportSolver();
 		eventBroker.subscribe("iTrace/xmlOutput", xmlSolver);
-		
-		/*socketServer = new Server();
-		Thread t1 = new Thread(socketServer);
-		t1.start();*/
 		
 		socketClient = new Client();
 		Thread t2 = new Thread(socketClient);
@@ -304,7 +297,6 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 								IGazeResponse response;
 								response = handleGaze(screenX, screenY, g);
 								if (response != null) {
-									//socketServer.process(response);
 									socketClient.process(response);
 									xmlSolver.process(response);
 

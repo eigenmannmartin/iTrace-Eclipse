@@ -25,13 +25,6 @@ public class Client implements Runnable {
 	public void process(IGazeResponse response) {
 		
 		StringJoiner str = new StringJoiner(";");
-		//str.add(String.valueOf(response.getGaze().getEventTime()));
-		//str.add(String.valueOf(System.currentTimeMillis()));
-		//str.add(String.valueOf(response.getGaze().getX()));
-		//str.add(String.valueOf(response.getGaze().getY()));
-		//str.add(response.getName());
-		//str.add(response.getGazeType());
-
 		if (response instanceof IStyledTextGazeResponse) {
 		    IStyledTextGazeResponse styledResponse = (IStyledTextGazeResponse) response;
 
