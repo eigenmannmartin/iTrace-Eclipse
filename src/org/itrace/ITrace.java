@@ -1,6 +1,5 @@
 package org.itrace;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
@@ -24,8 +23,6 @@ import org.itrace.gaze.IStyledTextGazeResponse;
 import org.itrace.gaze.handlers.IGazeHandler;
 import org.itrace.gaze.handlers.StyledTextGazeHandler;
 import org.itrace.solvers.XMLGazeExportSolver;
-//import org.itrace.Server;
-import org.itrace.Client;
 
 /**
  * The activator class controls the plug-in life cycle

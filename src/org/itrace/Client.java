@@ -4,7 +4,6 @@ package org.itrace;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.nio.ByteBuffer;
 import java.util.StringJoiner;
 
 import org.itrace.gaze.IGazeResponse;

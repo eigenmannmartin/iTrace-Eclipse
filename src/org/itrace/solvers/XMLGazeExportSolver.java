@@ -35,7 +35,8 @@ public class XMLGazeExportSolver implements IFileExportSolver, EventHandler {
     private Dimension screenRect;
     public boolean initialized = false;
 
-    public XMLGazeExportSolver() {
+    @SuppressWarnings("deprecation")
+	public XMLGazeExportSolver() {
     	UIManager.put("swing.boldMetal", new Boolean(false)); //make UI font plain
     }
     
