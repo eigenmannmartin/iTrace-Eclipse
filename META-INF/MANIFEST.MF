@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Itrace
 Bundle-SymbolicName: org.itrace;singleton:=true
-Bundle-Version: 0.1.0
+Bundle-Version: 0.1.2
 Bundle-Activator: org.itrace.ITrace
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -24,3 +24,4 @@ Bundle-ClassPath: .,
 Import-Package: org.eclipse.jdt.core,
  org.eclipse.jdt.core.dom,
  org.osgi.service.event;version="1.3.1"
+Automatic-Module-Name: org.itrace

@@ -102,7 +102,7 @@ public class ControlView extends ViewPart implements IPartListener2, EventHandle
 		filterComposite.setLayout(new GridLayout(2, false));
 		
 		//Filter composite end.
-    }
+	}
 
     @Override
     public void dispose() {

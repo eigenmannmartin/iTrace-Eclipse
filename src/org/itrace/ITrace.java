@@ -51,6 +51,7 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 	private long registerTime = 2000;
 	private IEventBroker eventBroker;
 	private Shell rootShell;
+	private Client socketClient;
 
 	/**
 	 * The constructor
@@ -76,6 +77,10 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 		eventBroker.subscribe("iTrace/sessionend", this);
 		xmlSolver = new XMLGazeExportSolver();
 		eventBroker.subscribe("iTrace/xmlOutput", xmlSolver);
+		
+		socketClient = new Client();
+		Thread t2 = new Thread(socketClient);
+		t2.start();
 	}
 
 	/*
@@ -292,6 +297,7 @@ public class ITrace extends AbstractUIPlugin implements EventHandler {
 								IGazeResponse response;
 								response = handleGaze(screenX, screenY, g);
 								if (response != null) {
+									socketClient.process(response);
 									xmlSolver.process(response);
 
 									if (response instanceof IStyledTextGazeResponse && response != null
